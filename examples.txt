@@ -1,0 +1,56 @@
+[
+{'input': '''Title: Title of the first paper. Abstract: Abstract of the first paper.''',
+'response': {
+"population_reason": "Reason for decision.", 
+"population_decision": "True/False/NotEvaluable", 
+"exposure_reason": "Reason for decision.", 
+"exposure_decision": "True/False/NotEvaluable", 
+"comparison_reason": "Reason for decision.", 
+"comparison_decision": "True/False/NotEvaluable", 
+"outcome_reason": "Reason for decision.", 
+"outcome_decision": "True/False/NotEvaluable", 
+"study_type_reason": "Reason for decision.",
+"study_type_decision": "True/False/NotEvaluable" }
+},
+{'input': '''Title: Title of the second paper. Abstract: Abstract of the second paper.''',
+'response': {
+"population_reason": "Reason for decision.", 
+"population_decision": "True/False/NotEvaluable", 
+"exposure_reason": "Reason for decision.", 
+"exposure_decision": "True/False/NotEvaluable", 
+"comparison_reason": "Reason for decision.", 
+"comparison_decision": "True/False/NotEvaluable", 
+"outcome_reason": "Reason for decision.", 
+"outcome_decision": "True/False/NotEvaluable", 
+"study_type_reason": "Reason for decision.",
+"study_type_decision": "True/False/NotEvaluable" }
+},
+{'input': '''Title: Title of the third paper. Abstract: Abstract of the third paper.''',
+'response': {
+"population_reason": "Reason for decision.", 
+"population_decision": "True/False/NotEvaluable", 
+"exposure_reason": "Reason for decision.", 
+"exposure_decision": "True/False/NotEvaluable", 
+"comparison_reason": "Reason for decision.", 
+"comparison_decision": "True/False/NotEvaluable", 
+"outcome_reason": "Reason for decision.", 
+"outcome_decision": "True/False/NotEvaluable", 
+"study_type_reason": "Reason for decision.",
+"study_type_decision": "True/False/NotEvaluable" }
+},
+
+{'input': '''Title: Title of the fourth paper. Abstract: Abstract of the fourth paper.''',
+'response': {
+"population_reason": "Reason for decision.", 
+"population_decision": "True/False/NotEvaluable", 
+"exposure_reason": "Reason for decision.", 
+"exposure_decision": "True/False/NotEvaluable", 
+"comparison_reason": "Reason for decision.", 
+"comparison_decision": "True/False/NotEvaluable", 
+"outcome_reason": "Reason for decision.", 
+"outcome_decision": "True/False/NotEvaluable", 
+"study_type_reason": "Reason for decision.",
+"study_type_decision": "True/False/NotEvaluable" }
+}
+]
+

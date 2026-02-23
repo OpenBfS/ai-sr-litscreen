@@ -1,0 +1,40 @@
+population: "
+  Include studies on:
+    • Humans (participants/subjects/volunteers/patients/workers), any sex/gender
+
+  Exclude:
+    • Non-human animal studies (in vivo; e.g., mouse, rat, porcine)."
+
+exposure: "Describe exposure/intervention.
+
+  Include:
+    • Exposure with specifics XYZ.
+    
+  Exclude:
+    • Exposures when certain conditions apply."
+
+    
+comparison: "
+  Include studies that compare outcomes between groups with different levels of exposure.
+
+  Exclude studies without any comparison group (only one exposure level, no contrast)."
+
+outcome: "
+  Include studies that report on the occurrence of specific outcome:
+    • outcome a
+    • outcome b
+    • outcome c
+    
+  Exclude studies that report only outcomes measured by:
+    • method a
+    • method b."
+
+study_type: "
+  Include:
+    • Randomized controlled trials
+
+  Exclude:
+    • Case reports and case series (no control or comparison group)
+    • Reviews
+    • Commentaries
+    • Conference abstracts."
