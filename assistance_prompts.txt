@@ -80,9 +80,6 @@ Exclude studies not measuring biomarkers of oxidative damage or stess or redox h
 study_type: "Include in vivo or in vitro experimental studies with primary data reported in publications, with controlled exposures to RF-EMF, exploring effects on predefined markers of oxidative stress and damage, and with the objects of study (animals/cells) in a controlled laboratory environment.
 
 Exclude review articles, opinion papers, case reports, proceedings or abstracts to meetings, and epidemiological studies."
-study_type_twostep: "Include in vivo or in vitro experimental studies with primary data reported in publications, and with the objects of study (animals/cells) in a controlled laboratory environment.
-
-Exclude review articles, opinion papers, case reports, proceedings or abstracts to meetings, and epidemiological studies."
 ```
  
 Now, please read the eligibility information from the systematic review in question and return a well-formatted .yaml file with the PICOS criteria. I will also provide title, abstract and introduction for more context.
