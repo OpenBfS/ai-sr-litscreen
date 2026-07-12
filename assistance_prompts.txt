@@ -1,0 +1,120 @@
+# Prompt to extract structured PECOS criteria from Abstract, Introduction and relevant Methods and Results sections of a SR. Use a flagship model, like gpt-5.
+
+PECOS_Extraction_Prompt = """
+I am currently designing a workflow for AI-assisted literature screening for systematic reviews.
+To validate my pipeline, I need to extract eligibility criteria from a published systematic review in a defined .yaml format. Can you help me extract the information from the paper and assign it correctly and comprehensibly for an LLM to the .yaml keys?
+Keep in mind that these are the criteria that the human reviewers were judging eligibility with. It has to be kept in mind that not all information will be written down in the Title / Abstracts to be screened, but will be “hidden” in the full text. I provide you with an example that is sound:
+
+```yaml
+population: "Include experimental studies involving in vivo or in vitro models of humans and other mammals.
+In vitro studies can include:
+  • Primary cells isolated from humans and mammals,
+  • Body fluids from humans and mammals,
+  • Immortalized and cancer cell lines, including differentiated cell lines of human and animal origin,
+  • Tissues and tissue fractions (humans and mammals),
+  • Three-dimensional (3-D) culture models and organoids.
+
+Exclude studies involving non-mammalian species."
+exposure: "Include studies that apply exposures to electric, magnetic, or electromagnetic radiofrequency (RF) fields within the frequency range 100 kHz to 300 GHz (covering the entire MHz range), and that report at least one of the following exposure descriptions:
+A. Body/tissue/sample-internal exposure metrics for field strength or RF power/energy absorption, measured or calculated  as follows:
+  • Specific absorption rate (SAR) [W/kg]
+  • Specific energy absorption (SA) [J/kg]
+  • Induced electric field strength [V/m]
+  • Induced magnetic field strength [A/m]
+  (For exposures predominantly using magnetic fields in the lower frequency range, the external magnetic field strength at the sample's position is an acceptable surrogate if penetration depth is high compared to sample dimension.)
+B. Body/tissue/sample-internal exposure metrics describing superficial absorption at frequencies above 6 GHz, measured or calculated as follows:
+  • Incident power flux density [W/m²]
+  • Incident energy density [J/m²]
+  • Transmitted (absorbed) power flux density [W/m²]
+  • Transmitted (absorbed) energy density [J/m²]
+C. Body/tissue/sample-external exposure metrics (field strength/incident RF power/energy), measured or calculated at the site of the exposed body/tissue/sample, in approximate far-field conditions, and with an exposure level at least 10-fold (for power flux density) or √10-fold (for field strength) above background::
+  • External electric field strength [V/m] (include if E > 1 V/m, or E > √10 × background level in unshielded environment; otherwise, no restriction)
+  • External magnetic field strength [mA/m] (include if H > 2.7 mA/m, or H > √10 × background level in unshielded environment; otherwise, no restriction)
+  • Incident power flux density [mW/m²] (include if PD > 2.5 mW/m², or PD > 10 × background level in unshielded environment; otherwise, no restriction),
+   If no background exposure level is reported, default thresholds are: 2.5 mW/m² (power flux density), 1 V/m (electric field), or 2.7 mA/m (magnetic field). No threshold applies if study was performed in EMF-shielded environment.
+D. Mobile phones or other RF-generating devices as the source of exposure (without reporting of metrics under A, B, or C):
+  • Device output controlled by hardware or software, operated close to body/tissue, with distance to sample reported
+  • Mobile phone in GSM mode with active call, operated ≤3 cm from sample body/tissue/sample, with active call maintained throughout the experiment.
+
+
+Exclude:
+•	Studies with a substantial exposure outside the relevant 100 kHz – 300 GHz frequency range.
+•	Studies using mobile phone exposures not in GSM mode, without active call, or not controlled by hardware or software.
+•	Studies not reporting exposure metrics."
+comparison: "Include studies that used at least one group exposed to radiofrequency electromagnetic fields (RF-EMF) and at least one separate reference group that is sham-exposed or not exposed to RF-EMF. If the included studies used separate temperature control groups (i.e. in order to investigate the impact of exposure-induced heat generation), this is considered an additional comparator.
+
+Exclude studies without sham-exposed animals or other controls (e.g., cage) with RF-EMF exposure in controls being substantially lower than in the RF-EMF treatment (verum) group"
+outcome: "Include studies measuring biomarkers of oxidative stress if these markers fulfill the criteria of the following two categories:
+ A. biomarkers of oxidative damage accepted for in vivo and in vitro studies:
+      8-oxo-2'-deoxyguanosine (8-oxo-dG, 8-OHdG) (indicates damaged DNA),
+      Chlorotyrosine (usually requires inflammation),
+      Glutathionylated protein/mixed protein disulfides (indicates reversibly modified proteins),
+      4-hydroxy-2-nonenal/HNE/HNE-conjugated proteins (indicates lipid peroxidation),
+      15F2-IsoProstane/8-iso-PGF2a (indicates oxidative stress; requires control with additional prostaglandin to exclude enzymatic production),
+      Methionine sulfoxide and cysteic acid (indicates damaged proteins),
+      Nitrotyrosine - free or in proteins (indicates damaged proteins),
+      Protein carbonyls/OxyBlot technique (indicates largely HNE or related alpha, beta-unsaturated aldehydes conjugated to protein),
+      Dityrosine (damaged proteins).
+ B. biomarkers of altered redox homeostasis accepted only for in vitro studies:
+        Superoxide (requires HPLC measurement of oxidized ethidium),
+    biomarkers of altered redox homeostasis accepted only for in vitro studies and due to their transient nature only if time course data is available:
+        Glutathione (GSH/GSSG ratio),
+        Lipid peroxides/lipid hydroperoxides,
+        Peroxynitrite,
+        Hydrogen peroxide. 
+
+  Exclude studies measuring biomarkers of oxidative stress considered non-specific and not valied as measures of oxidative stress, i.e. if these markers do not fulfill the requirements of the above two categories or from the following category:
+  X. biomarkers including any of the following:
+      Acrolein (also produced by metabolism),
+      Ascorbic acid/vitamin C (altered by diet in humans), 
+      Cysteine (altered by diet),
+      Malondialdehyde (MDA)/Thiobarbituric acid reacting substances (TBARS) (produces by many metabolic reactions other than oxidative stress),
+      Nfe2l2/Nrf2//Heme oxygenase/Peroxiredoxin/Thioredoxin/Thoredoxin Reductase 1/NQO1/GCLC/HMOX1/HO-1/PRDX1/TXN1/TXNRD1 (not necessarily caused by oxidative stress),
+      Antioxidant response element/electrophilic response element/ARE/EpRE --> Binding/activation/induction (not necessarily caused by oxidative stress),
+      Tocopherol/vitamin E (altered by diet),
+      Total antioxidant capacity (TAC)/Total oxidant status (TOS) (meaningless in biological context),
+      DCFDH fluorescence (measures iron-dependent oxidation of dye),
+      Other fluorescent dyes (lack specificity for real time measurement).
+  
+Exclude studies not measuring biomarkers of oxidative damage or stess or redox homeostasis."
+study_type: "Include in vivo or in vitro experimental studies with primary data reported in publications, with controlled exposures to RF-EMF, exploring effects on predefined markers of oxidative stress and damage, and with the objects of study (animals/cells) in a controlled laboratory environment.
+
+Exclude review articles, opinion papers, case reports, proceedings or abstracts to meetings, and epidemiological studies."
+study_type_twostep: "Include in vivo or in vitro experimental studies with primary data reported in publications, and with the objects of study (animals/cells) in a controlled laboratory environment.
+
+Exclude review articles, opinion papers, case reports, proceedings or abstracts to meetings, and epidemiological studies."
+```
+ 
+Now, please read the eligibility information from the systematic review in question and return a well-formatted .yaml file with the PICOS criteria. I will also provide title, abstract and introduction for more context.
+
+{Here, paste relevant sections of the systematic review publication – abstract, introduction, relevant methods sections, PRISMA flow chart if explicit exclusion reasons are listed}
+
+"""
+
+# Prompt to annotate title/absract examples for few-shot prompting according to the PECOS criteria of the respective SR. Use a flagship model, like gpt-5.
+
+Example_Annotation_Prompt = """
+You are going to help me reason and decide which studies to include into a systematic review at the title/abstract screening stage, i.e. which studies are warranted to be examined in the full text stage.
+
+Here are the PECOS eligibility criteria for the Systematic Review:
+
+{structured PECOS criteria}
+
+You will read the title and abstract of a study and provide your response in a JSON format, detailing and reasoning your decision for each of the five PECOS elements on whether the study is eligible (True), or not (False), or whether it is hard to evaluate / unclear (NotEvaluable) based on the PECOS element. Judge the PECOS elements only by the information pertinent to that very same element.
+Return your response as follows:
+
+{"population_reason": "your reasoning for eligibility of the population(s).",
+"population_decision": "True/False/NotEvaluable",
+"exposure_reason": "your reasoning for eligibility of the exposure(s)/intervention(s).",
+"exposure_decision": "True/False/NotEvaluable",
+"comparison_reason": "your reasoning for eligibility of the comparator(s)”,
+"comparison_decision": "True/False/NotEvaluable",
+"outcome_reason": "your reasoning for eligibility of the outcome(s)",
+"outcome_decision": "True/False/NotEvaluable",
+"study_type_reason": "your reasoning for eligibility of the study type(s)",
+"study_type_decision": "True/False/NotEvaluable"}
+
+Here is the title/abstract of the first study:
+
+{Title/Abstract}
+"""

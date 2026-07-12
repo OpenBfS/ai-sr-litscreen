@@ -4,6 +4,7 @@ langchain-core==0.3.45
 langchain-ollama==0.2.0
 langchain-openai==0.3.0
 openai==1.78.1
+python-dotenv==1.2.2
 langchain-text-splitters==0.3.2
 langdetect==1.0.9
 ollama==0.3.3

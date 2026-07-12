@@ -25,8 +25,11 @@ Two main workflows are implemented:
    - `examples.txt` – few‑shot examples (recommended: 4 TiAb records with PECOS‑wise decisions and reasons; at least one fully eligible and one with all or most PECOS elements ineligible).
    - `pecos_criteria.yaml` – PECOS eligibility criteria for your systematic review or research question.
    - `abs-screen.xlsx` or `abs-screen.ris` – TiAb records to be screened.
+   - `assistance_prompts.txt` provides prompts for extracting PECOS criteria into `pecos_criteria.yaml` and generating or annotating few-shot examples for `examples.txt`, helping prepare the files and text data required by the screening notebooks.
 
 3. **Run a workflow**:
+   - Copy `template.env` to `.env`, then set `OPENAI_API_KEY` and, if needed, `OLLAMA_BASE_URL`.
+   - Use the committed `config.txt`; it supplies the exact model IDs used by the notebooks.
    - For open‑source models, open `run-TiAbScreen_opensource.ipynb`.
    - For OpenAI models, open `run-TiAbScreen_openai.ipynb` and choose batch or on‑demand API mode as described in the notebook. Make sure to enter your Open API key in the `.env` file.
 

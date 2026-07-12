@@ -82,23 +82,23 @@ def extract_and_parse_json(input_content):
 
 class ValidateForInclusionLight(BaseModel):
     population: Literal['True', 'False', 'NotEvaluable'] = Field(
-        description="Evaluation result of the study population: True (include), False (exclude), or NotEvaluable", required=True
+        description="Evaluation result of the study population: True (include), False (exclude), or NotEvaluable"
     )
 
     exposure: Literal['True', 'False', 'NotEvaluable'] = Field(
-        description="Evaluation result of the exposure: True (include), False (exclude), or NotEvaluable", required=True
+        description="Evaluation result of the exposure: True (include), False (exclude), or NotEvaluable"
     )
 
     comparison: Literal['True', 'False', 'NotEvaluable'] = Field(
-        description="Evaluation result of the comparison: True (include), False (exclude), or NotEvaluable", required=True
+        description="Evaluation result of the comparison: True (include), False (exclude), or NotEvaluable"
     )
 
     outcome: Literal['True', 'False', 'NotEvaluable'] = Field(
-        description="Evaluation result of the outcome: True (include), False (exclude), or NotEvaluable", required=True
+        description="Evaluation result of the outcome: True (include), False (exclude), or NotEvaluable"
     )
 
     study_type: Literal['True', 'False', 'NotEvaluable'] = Field(
-        description="Evaluation result of the study type: True (include), False (exclude), or NotEvaluable", required=True
+        description="Evaluation result of the study type: True (include), False (exclude), or NotEvaluable"
     )
 
 
